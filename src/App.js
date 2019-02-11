@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Logo from './Logo.js';
+import Search from './Search.js';
 
 class App extends Component {
   render() {
@@ -9,8 +11,10 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Edit <code>src/App.js</code> and save to opposite.
           </p>
+          <Logo title="mikes button" type="primary"/>
+          <Search/>
           <a
             className="App-link"
             href="https://reactjs.org"
