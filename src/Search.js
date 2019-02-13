@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SearchWrapper = styled.div`    
-    position: relative;
-    float: left;
+    -webkit-appearance: none;
+    grid-area: search;
     
     input{
-		width: 972px;
+		width: 100%;
 		max-width: none;
 		border: 2px solid #004445;
 		height: 57px;
