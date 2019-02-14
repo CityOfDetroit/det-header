@@ -6,8 +6,7 @@ const SearchWrapper = styled.div`
     grid-area: search;
     
     input{
-		width: 100%;
-		max-width: none;
+		width: 90%;
 		border: 2px solid #004445;
 		height: 57px;
 		font-size: 30px;
@@ -31,7 +30,6 @@ const Search = (props) => (
             <input 
                 type="text" 
                 name="search" 
-                value="" 
                 size="30" 
                 maxlength="128" 
                 autocomplete="off" 

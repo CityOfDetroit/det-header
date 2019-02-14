@@ -7,6 +7,7 @@ const MenuWrapper = styled.div`
     top: 14px;
     grid-area: main;
     display: grid;
+    width: 85%;
     grid-tempate-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: 
@@ -34,7 +35,7 @@ const MenuWrapper = styled.div`
     .link-menu{
         grid-area: links;
     }
-    .langauges{
+    .languages{
         grid-area: langauge;
     }
 	.link-menu, .languages{
@@ -44,19 +45,17 @@ const MenuWrapper = styled.div`
     .languages ul li a{
         font-size: 12px;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 868px) {
         grid-template-areas: 
-          "links links"
-          "langauge langauge"
-          "search search"
+          "links";
+        .hide-small{
+            display: none;
+        }
       }
       @media (max-width: 588px) {
       grid-template-areas: 
         "links"
         "search";
-        .hide-small{
-            display: none;
-        }
       }
 `
 
@@ -66,8 +65,8 @@ const Menu = (props) => (
             <div className = "link-menu">
     			<ul>
     				<li><a href="https://detroitmi.gov/departments/detroit-department-transportation/bus-schedules" target="_blank">Buses</a></li>
-    				<li><a class="hide-small" href="https://detroitmi.gov/departments" target="_blank">Departments</a></li>
-    				<li><a class="hide-small" href="https://detroitmi.gov/government" target="_blank">Government</a></li>
+    				<li class="hide-small"><a href="https://detroitmi.gov/departments" target="_blank">Departments</a></li>
+    				<li class="hide-small"><a href="https://detroitmi.gov/government" target="_blank">Government</a></li>
     				<li><a href="https://detroitmi.gov/departments/human-resources-department/apply-job" target="_blank">Jobs</a></li>
     				<li><a href="https://detroitmi.gov/how-do-i/pay-fine-bill-or-tax" target="_blank">Pay</a></li>
     				<li><a href="https://detroitmi.gov/departments/water-and-sewerage-department" target="_blank">Water</a></li>

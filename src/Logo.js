@@ -2,7 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LogoWrapper = styled.div`
+    display: inline-block;
+    padding: 10px 5px;
     grid-area: logo;
+    img{
+        max-width: 100%;
+    }
+    @media (max-width: 588px) {
+        width: 100px;
+    }
 `
 
 const Logo = (props) => (

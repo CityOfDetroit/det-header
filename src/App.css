@@ -12,9 +12,9 @@
   background: ghostwhite;
   grid-template-columns: auto 1fr auto; 
   grid-tempate-rows: 200px 200px;
-  grid-gap: 20px;
+  grid-gap: 10px;
   grid-template-areas: 
-   "logo main"
-   "logo search"
+   "logo main main"
+   "logo search bigmenu"
   ;
 }

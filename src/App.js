@@ -4,6 +4,7 @@ import './App.css';
 import Logo from './Logo.js';
 import Search from './Search.js';
 import Menu from './Menu.js';
+import BigMenu from './BigMenu';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <Logo title="mikes button" type="primary"/>
           <Menu/>
           <Search/>
+          <BigMenu/>
         </header>
       </div>
     );
