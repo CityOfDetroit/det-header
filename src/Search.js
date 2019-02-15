@@ -1,14 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import BigMenu from './BigMenu.js';
 
 const SearchWrapper = styled.div`    
     -webkit-appearance: none;
     grid-area: search;
+
+    form{
+        display: inline-flex;
+        width: 90%;
+        margin-right: 3px;
+        vertical-align: top;
+    }
     
     input{
-		width: 90%;
+		width: 100%;
 		border: 2px solid #004445;
-		height: 57px;
+		height: 52px;
 		font-size: 30px;
 		font-family: 'Montserrat';
         text-align: center;
@@ -36,6 +44,7 @@ const Search = (props) => (
                 placeholder="SEARCH" 
             />
         </form>
+        <BigMenu/>
     </SearchWrapper>
 );
 

@@ -8,9 +8,6 @@ const LogoWrapper = styled.div`
     img{
         max-width: 100%;
     }
-    @media (max-width: 588px) {
-        width: 100px;
-    }
 `
 
 const Logo = (props) => (

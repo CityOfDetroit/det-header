@@ -32,26 +32,27 @@ const MenuWrapper = styled.div`
     	text-decoration: none;
         color: #18252a;
     }
-    .link-menu{
+    div:nth-child(1){
         grid-area: links;
     }
-    .languages{
+    div:nth-child(2){
         grid-area: langauge;
     }
-	.link-menu, .languages{
+	div:nth-child(1), div:nth-child(2){
         display: inline-block;
-        vertical-align: top;
+        height: 20px;
     }
-    .languages ul li a{
+    div:nth-child(2) ul li a{
         font-size: 12px;
     }
     @media (max-width: 868px) {
         grid-template-areas: 
           "links";
-        .hide-small{
+        *.hide-small, div:nth-child(2).hide-small{
             display: none;
         }
       }
+
       @media (max-width: 588px) {
       grid-template-areas: 
         "links"
@@ -60,26 +61,25 @@ const MenuWrapper = styled.div`
 `
 
 const Menu = (props) => (
-  //html
         <MenuWrapper>
-            <div className = "link-menu">
-    			<ul>
-    				<li><a href="https://detroitmi.gov/departments/detroit-department-transportation/bus-schedules" target="_blank">Buses</a></li>
-    				<li class="hide-small"><a href="https://detroitmi.gov/departments" target="_blank">Departments</a></li>
-    				<li class="hide-small"><a href="https://detroitmi.gov/government" target="_blank">Government</a></li>
-    				<li><a href="https://detroitmi.gov/departments/human-resources-department/apply-job" target="_blank">Jobs</a></li>
-    				<li><a href="https://detroitmi.gov/how-do-i/pay-fine-bill-or-tax" target="_blank">Pay</a></li>
-    				<li><a href="https://detroitmi.gov/departments/water-and-sewerage-department" target="_blank">Water</a></li>
-    			</ul>
-    		</div>
-            <div className = "languages hide-small">
-    			<ul>
-    				<li><a href="https://detroitmi.gov/" target="_blank">English</a></li>
-    				<li><a href="https://detroitmi.gov/es" target="_blank">Español</a></li>
-    				<li><a href="https://detroitmi.gov/bn" target="_blank">Bengali</a></li>
-    				<li><a href="https://detroitmi.gov/ar" target="_blank">العربية</a></li>
-    			</ul>
-    		</div>
+          <div>
+            <ul>
+              <li><a href="https://detroitmi.gov/departments/detroit-department-transportation/bus-schedules" target="_blank">Buses</a></li>
+              <li className="hide-small"><a href="https://detroitmi.gov/departments" target="_blank">Departments</a></li>
+              <li className="hide-small"><a href="https://detroitmi.gov/government" target="_blank">Government</a></li>
+              <li><a href="https://detroitmi.gov/departments/human-resources-department/apply-job" target="_blank">Jobs</a></li>
+              <li><a href="https://detroitmi.gov/how-do-i/pay-fine-bill-or-tax" target="_blank">Pay</a></li>
+              <li><a href="https://detroitmi.gov/departments/water-and-sewerage-department" target="_blank">Water</a></li>
+            </ul>
+          </div>
+          <div className = "hide-small">
+            <ul>
+              <li><a href="https://detroitmi.gov/" target="_blank">English</a></li>
+              <li><a href="https://detroitmi.gov/es" target="_blank">Español</a></li>
+              <li><a href="https://detroitmi.gov/bn" target="_blank">Bengali</a></li>
+              <li><a href="https://detroitmi.gov/ar" target="_blank">العربية</a></li>
+            </ul>
+          </div>
         </MenuWrapper>
 );
 

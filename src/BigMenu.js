@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BigMenuWrapper = styled.div`
-    left: 3px;
     width: 57px;
     height: 57px;
-    grid-area: bigmenu;
+    display: inline-block;
 
-    .big-menu{
+
+    label {
 	    background: #feb70d;
 	    color: #18252a;
 	    transition: transform 250ms ease;
@@ -22,7 +22,7 @@ const BigMenuWrapper = styled.div`
 		font-weight: bold;
 		font-size: 10px;
 	}
-	.big-menu span{
+	span{
 		position: relative;
 	    display: block;
 	    width: 100%;
@@ -34,8 +34,11 @@ const BigMenuWrapper = styled.div`
 	    transition: transform 250ms ease;
 	    z-index: 200;
 	}
+    @media (max-width: 868px) {
+            display: none;
+      }
     @media (max-width: 588px) {
-        
+        display: none;   
     }
 `
 
