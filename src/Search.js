@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import BigMenu from './BigMenu.js';
 
 const SearchWrapper = styled.div`    
     -webkit-appearance: none;
@@ -39,12 +38,11 @@ const Search = (props) => (
                 type="text" 
                 name="search" 
                 size="30" 
-                maxlength="128" 
-                autocomplete="off" 
+                maxLength="128" 
+                autoComplete="off" 
                 placeholder="SEARCH" 
             />
         </form>
-        <BigMenu/>
     </SearchWrapper>
 );
 
