@@ -2,6 +2,43 @@ import React from "react";
 import styled from "styled-components";
 
 function BigMenu(props) {
+  const BigMenu = styled.div``;
+
+  const MenuButton = styled.div`
+    float: left;
+    position: relative;
+    left: 3px;
+    width: 57px;
+    height: 57px;
+    label{
+	    background: #feb70d;
+	    color: #18252a;
+	    transition: transform 250ms ease;
+	    cursor: pointer;
+	    z-index: 20;
+	    font-size: 10px;
+	    letter-spacing: -.13em;
+	    padding: 13px;
+		display: inline-block;
+		max-width: 100%;
+		margin-bottom: 5px;
+		font-weight: bold;
+		font-size: 10px;
+    }
+  span{
+		position: relative;
+	    display: block;
+	    width: 100%;
+	    height: 3px;
+	    margin-top: 3px;
+	    background-color: #18252a;
+	    float: left;
+	    transform-origin: center center;
+	    transition: transform 250ms ease;
+	    z-index: 20;
+	}
+  `;
+
   const BigMenuWrapper = styled.div`
     display: ${props.display ? "block" : "none"};
     position: fixed;
@@ -50,9 +87,41 @@ function BigMenu(props) {
       background: #004445;
     }
 
-    .nav-item.lvl-1 .nav-container {
-      display: ${props.buses ? "block" : "none"};
+    .nav-item.lvl-1{
+      display: ${!props.status.departments && !props.status.government && !props.status.howDoI ? "block" : "none"}
     }
+
+    .nav-item.lvl-1#departments{
+      display: ${props.status.departments ? "block" : ''}
+    }
+
+    .nav-item.lvl-1#departments > a,
+    .nav-item.lvl-1#departments > .sub-items-btn{
+      display: ${props.status.departments ? "none" : "block"}
+    }
+
+    .nav-item.lvl-1#government{
+      display: ${props.status.government ? "block" : ''}
+    }
+
+    .nav-item.lvl-1#government > a,
+    .nav-item.lvl-1#government > .sub-items-btn{
+      display: ${props.status.government ? "none" : "block"}
+    }
+
+    .nav-item.lvl-1#how-do-i{
+      display: ${props.status.howDoI ? "block" : ''}
+    }
+
+    .nav-item.lvl-1#how-do-i > a,
+    .nav-item.lvl-1#how-do-i > .sub-items-btn{
+      display: ${props.status.howDoI ? "none" : "block"}
+    }
+
+    .nav-item.lvl-1 > .nav-container .nav-item .nav-container{
+      display: none;
+    }
+
     .nav-item.back {
       height: 20px;
       padding: 1em;
@@ -105,20 +174,32 @@ function BigMenu(props) {
   `;
 
   return (
+    <BigMenu>
+    {props.display ? '':
+    <MenuButton onClick={props.toggleMenu} id="main-menu">
+      <label>
+        <span></span>
+        <span></span>
+        <span></span>
+          MENU
+      </label>
+    </MenuButton>
+    }
+    {props.display ? 
     <BigMenuWrapper id="big-nav">
-      {props.display && "Hello"}
       <div className="search-box">
-        <div id="close-button">X</div>
+        <div id="close-button" onClick={props.toggleMenu}>X</div>
         <input id="menu-search" type="text" name="" placeholder="SEARCH" />
       </div>
       <div>
-        <div className="nav-item lvl-1">
+        <div className="nav-item lvl-1" id="departments">
           <a href="https://detroitmi.gov/departments">
             <span>DEPARTMENTS</span>
           </a>
-          <div className="sub-items-btn" />
+          <div className="sub-items-btn" onClick={(e) => {props.subMenuClick(e, {departments: true, government: false, howDoI: false})}} />
+          {props.status.departments ? 
           <div className="nav-container">
-            <div className="nav-item back">
+            <div className="nav-item back" onClick={(e) => {props.subMenuClick(e, {departments: false, government: false, howDoI: false})}}>
               <i className="fas fa-angle-left" /> BACK
             </div>
             <div className="nav-item">
@@ -3535,15 +3616,17 @@ function BigMenu(props) {
               </div>
             </div>
           </div>
+          : ''}
         </div>
-        <div className="nav-item lvl-1">
+        <div className="nav-item lvl-1" id="government">
           <a href="/government">
             <span>GOVERNMENT</span>
           </a>
 
-          <div className="sub-items-btn" />
+          <div className="sub-items-btn"  onClick={(e) => {props.subMenuClick(e, {departments: false, government: true, howDoI: false})}} />
+          {props.status.government ? 
           <div className="nav-container">
-            <div className="nav-item back">
+            <div className="nav-item back" onClick={(e) => {props.subMenuClick(e, {departments: false, government: false, howDoI: false})}}>
               <i className="fas fa-angle-left" /> BACK
             </div>
             <div className="nav-item">
@@ -4705,14 +4788,16 @@ function BigMenu(props) {
               </a>
             </div>
           </div>
+          : ''}
         </div>
-        <div className="nav-item lvl-1">
+        <div className="nav-item lvl-1" id="how-do-i">
           <a href="/how-do-i">
             <span>HOW DO I</span>
           </a>
-				  <div className="sub-items-btn" onClick={props.setBuses} />
-          <div className="nav-container">
-            <div className="nav-item back">
+				  <div className="sub-items-btn"  onClick={(e) => {props.subMenuClick(e, {departments: false, government: false, howDoI: true})}} />
+          {props.status.howDoI ? 
+          <div className="nav-container" id="how-do-i-container">
+            <div className="nav-item back" onClick={(e) => {props.subMenuClick(e, {departments: false, government: false, howDoI: false})}}>
               <i className="fas fa-angle-left" /> BACK
             </div>
             <div className="nav-item">
@@ -4806,6 +4891,7 @@ function BigMenu(props) {
               </a>
             </div>
           </div>
+          : ''}
         </div>
         <div className="nav-item lvl-1">
           <a href="https://detroitmi.gov/buses">
@@ -4854,88 +4940,9 @@ function BigMenu(props) {
         </div>
       </div>
     </BigMenuWrapper>
+      : ''}
+    </BigMenu>
   );
 }
-// window.addEventListener('load', function () {
-// 	menuClick();
-// })
-
-// var subMenus = document.getElementsByClassName('sub-items-btn');
-// 	for(var i = 0; i < subMenus.length; i++) {
-// 		var subMenu = subMenus[i];
-// 		subMenu.onClick = function(e) {
-// 			subMenuClick(e);
-// 		}
-// 	}
-
-// var backBtns = document.getElementsByClassName('back');
-// 	for(var i = 0; i < backBtns.length; i++) {
-// 		var backBtn = backBtns[i];
-// 		backBtn.onClick = function(e) {
-// 			backBtnClick(e);
-// 		}
-// 	}
-
-// }, false);
-
-// function menuClick(e) {
-// 	const navigation = document.getElementById('big-nav');
-// 	if (navigation.style.display == 'none') {
-// 	 navigation.style.display = 'block';
-// 	}
-// 	else {
-// 	 navigation.style.display = 'none';
-// 	}
-// }
-
-// function subMenuClick(e){
-
-// 	const nextDiv = e.path[0].nextElementSibling;
-// 	nextDiv.style.display = 'block';
-
-// 	//hide all level 1
-// 	var navLvl1 = document.getElementsByClassName('lvl-1'), i;
-// 	for (i = 0; i < navLvl1.length; i += 1) {
-// 		navLvl1[i].style.display = 'none';
-// 	};
-// 	console.log(e);
-
-// 	//show closest level 1
-// 	e.path[0].closest('.lvl-1').style.display = 'block';
-// 	e.path[0].closest('.lvl-1').children[0].style.display = 'none';
-// 	e.path[0].closest('.lvl-1').children[1].style.display = 'none';
-
-// }
-
-// function backBtnClick(e){
-// 	console.log(e);
-// 	e.path[0].closest('.nav-container').style.display = 'none';
-// 	e.path[0].closest('.lvl-1').children[0].style.display = 'block';
-// 	e.path[0].closest('.lvl-1').children[1].style.display = 'block';
-
-// 	//show all level 1
-// 	var navLvl1 = document.getElementsByClassName('lvl-1'), i;
-// 	for (i = 0; i < navLvl1.length; i += 1) {
-// 		navLvl1[i].style.display = 'block';
-// 	};
-
-// }
-
-// function closeMenu(e){
-// 	document.getElementById('big-nav').style.display = 'none';
-
-// 	//hide all submenus
-// 	var navContainers = document.getElementsByClassName('nav-container'), i;
-// 	for (i = 0; i < navContainers.length; i += 1) {
-// 		navContainers[i].style.display = 'none';
-// 	};
-// 	//show all level 1
-// 	var navLvl1 = document.getElementsByClassName('lvl-1'), i;
-// 	for (i = 0; i < navLvl1.length; i += 1) {
-// 		navLvl1[i].style.display = 'block';
-// 		navLvl1[i].children[0].style.display = 'block';
-// 		if(navLvl1[i].children[1]){navLvl1[i].children[1].style.display = 'block'};
-// 	};
-// }
 
 export default BigMenu;

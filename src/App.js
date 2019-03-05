@@ -8,26 +8,34 @@ import BigMenu from "./BigMenu";
 
 function App() {
   const [menu, setMenu] = useState(false);
-  const [buses, setBuses] = useState(false);
 
-  const toggleBuses = event => {
-    console.log("how do it");
+  const [status, setStatus] = useState(
+    {
+      departments : false,
+      government : false,
+      howDoI : false
+    }
+  );
+
+  const toggleMenu = event => {
     console.log(event.target);
-    setBuses(menuState => !menuState);
-  };
-  const toggleMenu = () => {
     setMenu(menuState => !menuState);
   };
+
+  const subMenuClick = (e, category) => {
+    setStatus(
+      category
+    );
+  }
+
 
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={toggleMenu}>open Menu</button>
         <Logo title="mikes button" type="primary" />
         <Menu />
         <Search />
-        <BigMenu display={menu} buses={buses} setBuses={toggleBuses} />
-        {/* {menu && } */}
+        <BigMenu display={menu} toggleMenu={toggleMenu} status={status} subMenuClick={subMenuClick}/>
       </header>
     </div>
   );
