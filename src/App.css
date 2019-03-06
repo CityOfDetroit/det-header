@@ -12,9 +12,9 @@
   background: ghostwhite;
   grid-template-columns: auto 1fr; 
   grid-template-rows: 55px 110px;
-  grid-gap: 0px 10px;
+  grid-gap: 0px 10px 0px;
   grid-template-areas: 
-   "logo main"
-   "logo search"
+   "logo main main"
+   "logo search menu"
   ;
 }

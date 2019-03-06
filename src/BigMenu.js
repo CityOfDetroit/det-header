@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 function BigMenu(props) {
-  const BigMenu = styled.div``;
+  const BigMenu = styled.div`
+    grid-area: menu;
+  `;
 
   const MenuButton = styled.div`
     float: left;
@@ -24,6 +26,19 @@ function BigMenu(props) {
 		margin-bottom: 5px;
 		font-weight: bold;
 		font-size: 10px;
+      :checked ~  span {
+        background-color: #18252a;
+        transition: transform 250ms ease; }
+        :checked ~ span:nth-of-type(1) {
+          transform: translateY(3px) rotate(45deg); }
+        :checked ~ span:nth-of-type(2) {
+          display: none; }
+        :checked ~ span:nth-of-type(3) {
+          transform: translateY(-3px) rotate(-45deg);
+          margin-bottom: 5px; }
+        :checked ~ main {
+          transform: translateX(250px);
+          transition: transform 500ms ease; }
     }
   span{
 		position: relative;
@@ -36,7 +51,8 @@ function BigMenu(props) {
 	    transform-origin: center center;
 	    transition: transform 250ms ease;
 	    z-index: 20;
-	}
+  }
+
   `;
 
   const BigMenuWrapper = styled.div`
@@ -48,6 +64,7 @@ function BigMenu(props) {
     height: 100%;
     overflow-y: scroll;
     z-index: 100;
+    transition: right 500ms ease;
 
     #close-button {
       height: 50px;
@@ -59,9 +76,10 @@ function BigMenu(props) {
       cursor: pointer;
     }
 
-    .nav-item.lvl-1 {
-      height: 55px;
+    .nav-item.lvl-1 {    
+      height: 45px;
       width: 480px;
+      padding-top: 10px;
     }
 
     .sub-items-btn {
@@ -71,16 +89,23 @@ function BigMenu(props) {
       font-weight: bold;
       color: #9fd5b3;
       cursor: pointer;
-      height: 30px;
+      height: 25px;
       position: fixed;
       right: 0px;
-      background: #004445;
-      border: 1px solid white;
       display: none;
+      margin-top:-10px;
+    }
+
+    .sub-items-btn:hover{
+      background: #004445;
     }
 
     .lvl-1 > .sub-items-btn {
       display: block;
+    }
+
+    .sub-items-btn:before{
+      content: ">"
     }
 
     .sub-items-btn:hover {
@@ -97,7 +122,7 @@ function BigMenu(props) {
 
     .nav-item.lvl-1#departments > a,
     .nav-item.lvl-1#departments > .sub-items-btn{
-      display: ${props.status.departments ? "none" : "block"}
+      display: ${props.status.departments ? "none" : "inline-block"}
     }
 
     .nav-item.lvl-1#government{
@@ -106,7 +131,7 @@ function BigMenu(props) {
 
     .nav-item.lvl-1#government > a,
     .nav-item.lvl-1#government > .sub-items-btn{
-      display: ${props.status.government ? "none" : "block"}
+      display: ${props.status.government ? "none" : "inline-block"}
     }
 
     .nav-item.lvl-1#how-do-i{
@@ -115,7 +140,7 @@ function BigMenu(props) {
 
     .nav-item.lvl-1#how-do-i > a,
     .nav-item.lvl-1#how-do-i > .sub-items-btn{
-      display: ${props.status.howDoI ? "none" : "block"}
+      display: ${props.status.howDoI ? "none" : "inline-block"}
     }
 
     .nav-item.lvl-1 > .nav-container .nav-item .nav-container{
@@ -142,9 +167,10 @@ function BigMenu(props) {
       display: flex;
     }
 
-    .nav-item a:hover {
+    .nav-item.lvl-1 .nav-container .nav-item:hover {
       background: #9fd5b3;
     }
+
     .nav-item a span {
       margin: auto 0;
       padding: 0.5em;
@@ -164,6 +190,7 @@ function BigMenu(props) {
       border: none;
       border-bottom: 2px solid #fff;
       padding: 0 0 0 8px;
+      font-size: 1em;
     }
 
     #menu-search:placeholder {
@@ -175,7 +202,6 @@ function BigMenu(props) {
 
   return (
     <BigMenu>
-    {props.display ? '':
     <MenuButton onClick={props.toggleMenu} id="main-menu">
       <label>
         <span></span>
@@ -184,7 +210,6 @@ function BigMenu(props) {
           MENU
       </label>
     </MenuButton>
-    }
     {props.display ? 
     <BigMenuWrapper id="big-nav">
       <div className="search-box">

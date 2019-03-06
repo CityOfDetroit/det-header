@@ -7,7 +7,7 @@ const SearchWrapper = styled.div`
 
     form{
         display: inline-flex;
-        width: 90%;
+        width: 100%;
         margin-right: 3px;
         vertical-align: top;
     }

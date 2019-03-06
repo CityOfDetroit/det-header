@@ -34,25 +34,11 @@ function App() {
       <header className="App-header">
         <Logo title="mikes button" type="primary" />
         <Menu />
-        <Search />
+        <Search/>
         <BigMenu display={menu} toggleMenu={toggleMenu} status={status} subMenuClick={subMenuClick}/>
       </header>
     </div>
   );
 }
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           <Logo title="mikes button" type="primary"/>
-//           <Menu/>
-//           <Search/>
-//         </header>
-//       </div>
-//     );
-//   }
-// }
 
 export default App;

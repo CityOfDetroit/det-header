@@ -4,11 +4,10 @@ import styled from 'styled-components';
 
 const MenuWrapper = styled.div`
     position: relative;
-    top: 14px;
+    top: 32px;
     grid-area: main;
     display: grid;
-    width: 85%;
-    grid-tempate-columns: 1fr 1fr;
+    width: 95%;
     grid-template-rows: auto auto;
     grid-template-areas: 
       "links langauge";
@@ -34,6 +33,7 @@ const MenuWrapper = styled.div`
     }
     div:nth-child(1){
         grid-area: links;
+        margin-right: 5em
     }
     div:nth-child(2){
         grid-area: langauge;
