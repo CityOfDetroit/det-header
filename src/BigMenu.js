@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import Departments from "./Departments";
 import Government from "./Government";
@@ -7,6 +7,10 @@ import Howdoi from "./Howdoi";
 
 const BigMenuContainer = styled.div`
   grid-area: menu;
+  .active {
+    right: 0px;
+    transition: right 500ms ease;
+  }
 `;
 
 const MenuButton = styled.div`
@@ -63,15 +67,14 @@ const MenuButton = styled.div`
 `;
 
 const BigMenuWrapper = styled.div`
-  display: ${props => (props.display ? "block" : "none")};
+  display: block;
   position: fixed;
-  right: 0px;
+  right: -480px;
   top: 0px;
   background: rgba(0, 0, 0, 0.9);
   height: 100%;
   overflow-y: scroll;
   z-index: 100;
-  transition: right 500ms ease;
 
   #close-button {
     height: 50px;
@@ -87,6 +90,8 @@ const BigMenuWrapper = styled.div`
     height: 45px;
     width: 480px;
     padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .sub-items-btn {
@@ -97,7 +102,6 @@ const BigMenuWrapper = styled.div`
     color: #9fd5b3;
     cursor: pointer;
     height: 25px;
-    position: fixed;
     right: 0px;
     display: none;
     margin-top: -10px;
@@ -119,14 +123,14 @@ const BigMenuWrapper = styled.div`
     background: #004445;
   }
 
-  .nav-item.lvl-1 {
+  /* .nav-item.lvl-1 {
     display: ${props =>
       !props.status.departments &&
       !props.status.government &&
       !props.status.howDoI
         ? "block"
         : "none"};
-  }
+  } */
 
   .nav-item.lvl-1#departments {
     display: ${props => (props.status.departments ? "block" : "")};
@@ -211,8 +215,12 @@ const BigMenuWrapper = styled.div`
     font-weight: 900;
   }
 
-  .big-nav-container {
-    position: relative;
+  .nav-container {
+    width: 480px;
+    z-index: 9999px;
+    position: fixed;
+    background: black;
+    height: 100%;
   }
 
   .fade-enter-active.nav-container {
@@ -220,9 +228,6 @@ const BigMenuWrapper = styled.div`
   }
 
   .fade-exit-active.nav-container {
-    position: absolute;
-    width: 100%;
-    top: 10px;
     animation: slide-out 0.5s ease;
   }
 
@@ -261,145 +266,139 @@ class BigMenu extends React.Component {
             MENU
           </label>
         </MenuButton>
+        <BigMenuWrapper
+          id="big-nav"
+          status={this.props.status}
+          display={this.props.display}
+          className={`${this.props.display ? "active" : ""}`}
+        >
+          <div className="search-box">
+            <div id="close-button" onClick={this.props.toggleMenu}>
+              X
+            </div>
+            <input id="menu-search" type="text" name="" placeholder="SEARCH" />
+          </div>
+          <div className="big-nav-container">
+            <CSSTransition
+              in={this.props.status.departments}
+              timeout={400}
+              classNames="fade"
+              unmountOnExit
+            >
+              <Departments subMenuClick={this.props.subMenuClick} />
+            </CSSTransition>
 
-        {this.props.display ? (
-          <BigMenuWrapper
-            id="big-nav"
-            status={this.props.status}
-            display={this.props.display}
-          >
-            <div className="search-box">
-              <div id="close-button" onClick={this.props.toggleMenu}>
-                X
-              </div>
-              <input
-                id="menu-search"
-                type="text"
-                name=""
-                placeholder="SEARCH"
+            <CSSTransition
+              in={this.props.status.government}
+              timeout={400}
+              classNames="fade"
+              unmountOnExit
+            >
+              <Government subMenuClick={this.props.subMenuClick} />
+            </CSSTransition>
+
+            <CSSTransition
+              in={this.props.status.howDoI}
+              timeout={400}
+              classNames="fade"
+              unmountOnExit
+            >
+              <Howdoi subMenuClick={this.props.subMenuClick} />
+            </CSSTransition>
+
+            <div className="nav-item lvl-1" id="departments">
+              <a href="https://detroitmi.gov/departments">
+                <span>DEPARTMENTS</span>
+              </a>
+              <div
+                className="sub-items-btn"
+                onClick={e => {
+                  this.props.subMenuClick(e, {
+                    departments: true,
+                    government: false,
+                    howDoI: false
+                  });
+                }}
               />
             </div>
-            <div className="big-nav-container">
-              <div className="nav-item lvl-1" id="departments">
-                <a href="https://detroitmi.gov/departments">
-                  <span>DEPARTMENTS</span>
-                </a>
-                <div
-                  className="sub-items-btn"
-                  onClick={e => {
-                    this.props.subMenuClick(e, {
-                      departments: true,
-                      government: false,
-                      howDoI: false
-                    });
-                  }}
-                />
-                <CSSTransition
-                  in={this.props.status.departments}
-                  timeout={400}
-                  classNames="fade"
-                  unmountOnExit
-                >
-                  <Departments subMenuClick={this.props.subMenuClick} />
-                </CSSTransition>
-              </div>
-              <div className="nav-item lvl-1" id="government">
-                <a href="/government">
-                  <span>GOVERNMENT</span>
-                </a>
+            <div className="nav-item lvl-1" id="government">
+              <a href="/government">
+                <span>GOVERNMENT</span>
+              </a>
 
-                <div
-                  className="sub-items-btn"
-                  onClick={e => {
-                    this.props.subMenuClick(e, {
-                      departments: false,
-                      government: true,
-                      howDoI: false
-                    });
-                  }}
-                />
-                <CSSTransition
-                  in={this.props.status.government}
-                  timeout={400}
-                  classNames="fade"
-                  unmountOnExit
-                >
-                  <Government subMenuClick={this.props.subMenuClick} />
-                </CSSTransition>
-              </div>
-              <div className="nav-item lvl-1" id="how-do-i">
-                <a href="/how-do-i">
-                  <span>HOW DO I</span>
-                </a>
-                <div
-                  className="sub-items-btn"
-                  onClick={e => {
-                    this.props.subMenuClick(e, {
-                      departments: false,
-                      government: false,
-                      howDoI: true
-                    });
-                  }}
-                />
-                <CSSTransition
-                  in={this.props.status.howDoI}
-                  timeout={400}
-                  classNames="fade"
-                  unmountOnExit
-                >
-                  <Howdoi subMenuClick={this.props.subMenuClick} />
-                </CSSTransition>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/buses">
-                  <span>BUSES</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/jobs">
-                  <span>JOBS</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/pay">
-                  <span>PAY</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/water">
-                  <span>WATER</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/events">
-                  <span>EVENTS</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/news">
-                  <span>NEWS</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/documents">
-                  <span>DOCUMENTS</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/forms">
-                  <span>FORMS</span>
-                </a>
-              </div>
-              <div className="nav-item lvl-1">
-                <a href="https://detroitmi.gov/city-hotlines">
-                  <span>HOTLINES</span>
-                </a>
-              </div>
+              <div
+                className="sub-items-btn"
+                onClick={e => {
+                  this.props.subMenuClick(e, {
+                    departments: false,
+                    government: true,
+                    howDoI: false
+                  });
+                }}
+              />
             </div>
-          </BigMenuWrapper>
-        ) : (
-          ""
-        )}
+            <div className="nav-item lvl-1" id="how-do-i">
+              <a href="/how-do-i">
+                <span>HOW DO I</span>
+              </a>
+              <div
+                className="sub-items-btn"
+                onClick={e => {
+                  this.props.subMenuClick(e, {
+                    departments: false,
+                    government: false,
+                    howDoI: true
+                  });
+                }}
+              />
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/buses">
+                <span>BUSES</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/jobs">
+                <span>JOBS</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/pay">
+                <span>PAY</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/water">
+                <span>WATER</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/events">
+                <span>EVENTS</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/news">
+                <span>NEWS</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/documents">
+                <span>DOCUMENTS</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/forms">
+                <span>FORMS</span>
+              </a>
+            </div>
+            <div className="nav-item lvl-1">
+              <a href="https://detroitmi.gov/city-hotlines">
+                <span>HOTLINES</span>
+              </a>
+            </div>
+          </div>
+        </BigMenuWrapper>
       </BigMenuContainer>
     );
   }
