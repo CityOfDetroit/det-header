@@ -69,7 +69,7 @@ const MenuButton = styled.div`
 const BigMenuWrapper = styled.div`
   display: block;
   position: fixed;
-  right: -480px;
+  right: -500px;
   top: 0px;
   background: rgba(0, 0, 0, 0.9);
   height: 100%;

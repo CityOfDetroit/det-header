@@ -45,7 +45,7 @@ const MenuWrapper = styled.div`
     div:nth-child(2) ul li a{
         font-size: 12px;
     }
-    @media (max-width: 868px) {
+    @media (max-width: 970px) {
         grid-template-areas: 
           "links";
         *.hide-small, div:nth-child(2).hide-small{
