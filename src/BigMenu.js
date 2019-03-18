@@ -10,6 +10,12 @@ const BigMenuContainer = styled.div`
   .active {
     right: 0px;
     transition: right 500ms ease;
+    width: min-content;
+    max-width: 100vw;
+  }
+  .closed {
+    right: -500px;
+    transition: right 500ms ease;
   }
 `;
 
@@ -77,18 +83,18 @@ const BigMenuWrapper = styled.div`
   z-index: 100;
 
   #close-button {
-    height: 50px;
-    width: 50px;
-    position: fixed;
+    height: 59px;
+    width: 59px;
     top: 10px;
     right: 27px;
     background: #feb70d;
     cursor: pointer;
+    order: 1;
+    margin-left: 10px;
   }
 
   .nav-item.lvl-1 {
     height: 45px;
-    width: 480px;
     padding-top: 10px;
     display: flex;
     justify-content: space-between;
@@ -193,13 +199,16 @@ const BigMenuWrapper = styled.div`
   }
 
   .search-box {
-    padding: 9px 75px 9px 9px;
+    padding: 9px;
     font-size: 30px;
+    display: flex;
+    justify-content: space-between
+
   }
 
   #menu-search {
-    width: 90%;
     height: 57px;
+    flex-grow: 1;
     background: transparent;
     color: white;
     font-family: "Montserrat";
@@ -209,10 +218,8 @@ const BigMenuWrapper = styled.div`
     font-size: 1em;
   }
 
-  #menu-search:placeholder {
-    color: white;
-    font-size: 1.5em;
-    font-weight: 900;
+  #menu-search::placeholder {
+    color: white;  
   }
 
   .nav-container {
@@ -270,7 +277,7 @@ class BigMenu extends React.Component {
           id="big-nav"
           status={this.props.status}
           display={this.props.display}
-          className={`${this.props.display ? "active" : ""}`}
+          className={`${this.props.display ? "active" : "closed"}`}
         >
           <div className="search-box">
             <div id="close-button" onClick={this.props.toggleMenu}>
