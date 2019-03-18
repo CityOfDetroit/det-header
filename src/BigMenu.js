@@ -4,6 +4,12 @@ import { CSSTransition } from "react-transition-group";
 import Departments from "./Departments";
 import Government from "./Government";
 import Howdoi from "./Howdoi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTimes,
+  faAngleLeft,
+  faAngleRight
+} from "@fortawesome/free-solid-svg-icons";
 
 const BigMenuContainer = styled.div`
   grid-area: menu;
@@ -85,13 +91,18 @@ const BigMenuWrapper = styled.div`
 
   #close-button {
     height: 59px;
-    width: 59px;
+    width: 69px;
     top: 10px;
-    right: 27px;
     background: #feb70d;
     cursor: pointer;
     order: 1;
     margin-left: 10px;
+    display: flex;
+    align-items: center;    
+  }
+
+  #close-button svg{
+    margin: auto;
   }
 
   .nav-item.lvl-1 {
@@ -114,6 +125,12 @@ const BigMenuWrapper = styled.div`
     margin-top: -10px;
   }
 
+   .sub-items-btn svg{
+     color: white;
+      font-size: 1.5em;
+      transform: rotate(180deg);
+   }
+
   .sub-items-btn:hover {
     background: #004445;
   }
@@ -123,7 +140,7 @@ const BigMenuWrapper = styled.div`
   }
 
   .sub-items-btn:before {
-    content: ">";
+    content: ">"
   }
 
   .sub-items-btn:hover {
@@ -283,7 +300,7 @@ class BigMenu extends React.Component {
         >
           <div className="search-box">
             <div id="close-button" onClick={this.props.toggleMenu}>
-              X
+              <FontAwesomeIcon icon={faTimes} />
             </div>
             <input id="menu-search" type="text" name="" placeholder="SEARCH" />
           </div>
@@ -328,7 +345,9 @@ class BigMenu extends React.Component {
                     howDoI: false
                   });
                 }}
-              />
+              >
+                {/* <FontAwesomeIcon icon={faAngleLeft} /> */}
+              </div>
             </div>
             <div className="nav-item lvl-1" id="government">
               <a href="/government">
@@ -344,7 +363,9 @@ class BigMenu extends React.Component {
                     howDoI: false
                   });
                 }}
-              />
+              >
+                {/* <FontAwesomeIcon icon={faAngleLeft} /> */}
+              </div>
             </div>
             <div className="nav-item lvl-1" id="how-do-i">
               <a href="/how-do-i">
@@ -359,7 +380,9 @@ class BigMenu extends React.Component {
                     howDoI: true
                   });
                 }}
-              />
+              >
+                {/* <FontAwesomeIcon icon={faAngleLeft} /> */}
+              </div>
             </div>
             <div className="nav-item lvl-1">
               <a href="https://detroitmi.gov/buses">
