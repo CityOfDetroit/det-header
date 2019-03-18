@@ -7,11 +7,12 @@ import Howdoi from "./Howdoi";
 
 const BigMenuContainer = styled.div`
   grid-area: menu;
+
   .active {
     right: 0px;
     transition: right 500ms ease;
-    width: min-content;
-    max-width: 100vw;
+    width: 100%;
+    max-width: 480px;
   }
   .closed {
     right: -500px;
@@ -209,6 +210,7 @@ const BigMenuWrapper = styled.div`
   #menu-search {
     height: 57px;
     flex-grow: 1;
+    width: 100%;
     background: transparent;
     color: white;
     font-family: "Montserrat";
